@@ -1,12 +1,13 @@
-from flask import Flask
+from server.auth import keyAuth
+from server.getmedia import GetMedia
 
-app = Flask(__name__)
+keyAuth(True, 'en')
 
-@app.route('/')
-def sayhello():
-    return 'Hello World'
+#Step 1; Check Cache Server for images
+GetMedia.checkCache(5);
 
-if __name__ == '__main__':
-    app.run()
 
+for i in GetMedia.movie_data_list:
+    GetMedia.getMovies(i)
+    print("||||||")
 

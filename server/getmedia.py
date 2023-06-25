@@ -21,3 +21,51 @@ Gets Movies from TMDB Server and saves them to CSV file
         }
         response = requests.get(url, headers=headers)
         print(response.text)
+import requests
+import server.auth as login
+
+
+class GetMedia:
+    """
+Gets all media types that are within the imdb database
+        """
+
+    movie_data_list = [
+    #nowplaying_m 
+    'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+    #mpopular_m
+    'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
+    #toprated_m
+    'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1',
+    #upcoming_m = 
+    'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1']
+
+    #data  bool
+    data_is_current = False
+    @staticmethod
+    def getMovies(category, debug_log = False):
+        """
+    Gets Movies from TMDB Server and saves them to CSV file
+        """
+        url = category
+        headers = {
+            "accept": "application/json",
+            "Authorization": "Bearer" + " " + login.api_token
+        }
+        response = requests.get(url, headers=headers)
+        data_is_current = True
+
+        if debug_log == True:
+            print(response.text)
+        
+
+    @staticmethod
+    def checkCache(check_interval):
+        """
+    Checks if image files exist along with movie description data 
+    on firebase server before calling a request to TMDB server
+        """
+        
+
+        #if local data is different from current data then call getMovies() 
+        #and overwrite current data stored on the server
