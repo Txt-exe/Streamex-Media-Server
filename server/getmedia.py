@@ -37,15 +37,27 @@ Gets all media types that are within the imdb database
     'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
     #toprated_m
     'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1',
-    #upcoming_m = 
+    #upcoming_m
     'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1']
 
-    #data  bool
+    tv_data_list = [
+
+    #air_today_tv 
+    'https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1',
+    #on_air_tv
+    'https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1',
+    #popular_tv
+    'https://api.themoviedb.org/3/tv/popular?language=en-US&page=1',
+    #top_rated_tv
+    'https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1'
+    ]
+
+    #data bool
     data_is_current = False
     @staticmethod
-    def getMovies(category, debug_log = False):
+    def getMedia(category, debug_log = False):
         """
-    Gets Movies from TMDB Server and saves them to CSV file
+    Gets Media(Movies Or TV) from TMDB Server and saves them to CSV file
         """
         url = category
         headers = {
