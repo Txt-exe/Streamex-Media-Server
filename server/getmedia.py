@@ -1,7 +1,4 @@
 import requests
-import auth as login
-import mediaurls as media_urls
-login.keyAuth(True, 'en')
 
 
 class GetMedia:

@@ -8,6 +8,7 @@ GetMedia.checkCache(5);
 
 
 for i in GetMedia.movie_data_list:
-    GetMedia.getMovies(i)
+    GetMedia.getMedia(i)
     print("Everything works")
+
 
