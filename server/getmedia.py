@@ -1,23 +1,4 @@
 import requests
-
-
-class GetMedia:
-    """
-Gets all media types that are within the imdb database
-        """
-
-    @staticmethod
-    def getMovies(category, ):
-        """
-Gets Movies from TMDB Server and saves them to CSV file
-        """
-        url = category
-        headers = {
-            "accept": "application/json",
-            "Authorization": "Bearer" + " " + login.api_token
-        }
-        response = requests.get(url, headers=headers)
-        print(response.text)
 import requests
 import server.auth as login
 
@@ -28,14 +9,15 @@ Gets all media types that are within the imdb database
         """
 
     movie_data_list = [
+
     #nowplaying_m 
-    'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+    'https://api.themoviedb.org/3/movie/now_playing?language=en',
     #mpopular_m
-    'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
+    'https://api.themoviedb.org/3/movie/popular?language=en',
     #toprated_m
-    'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1',
+    'https://api.themoviedb.org/3/movie/top_rated?language=en',
     #upcoming_m
-    'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1']
+    'https://api.themoviedb.org/3/movie/upcoming?language=en']
 
     tv_data_list = [
 
@@ -48,6 +30,8 @@ Gets all media types that are within the imdb database
     #top_rated_tv
     'https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1'
     ]
+
+    movie_index = []
 
     #data bool
     data_is_current = False
@@ -62,10 +46,12 @@ Gets all media types that are within the imdb database
             "Authorization": "Bearer" + " " + login.api_token
         }
         response = requests.get(url, headers=headers)
-        data_is_current = True
-
+       
         if debug_log == True:
-            print(response.text)
+
+            pass
+            GetMedia.movie_index.append(response.text)
+
         
 
     @staticmethod
