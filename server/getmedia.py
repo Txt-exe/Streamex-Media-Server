@@ -1,5 +1,4 @@
 import requests
-import requests
 import server.auth as login
 
 
@@ -31,7 +30,7 @@ Gets all media types that are within the imdb database
     'https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1'
     ]
 
-    movie_index = []
+    movie_index = {}
 
     #data bool
     data_is_current = False
@@ -50,7 +49,7 @@ Gets all media types that are within the imdb database
         if debug_log == True:
 
             pass
-            GetMedia.movie_index.append(response.text)
+            GetMedia.movie_index.update(response.text)
 
         
 
