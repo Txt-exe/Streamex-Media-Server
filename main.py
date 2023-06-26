@@ -14,3 +14,5 @@ keyAuth(True, 'en')
 
 #Step 1; Check Cache Server for images
 GetMedia.checkCache(5);
+
+GetMedia.getAllMedia(GetMedia.air_today_tv, True)
