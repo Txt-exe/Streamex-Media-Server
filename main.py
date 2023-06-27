@@ -1,7 +1,7 @@
 from server.auth import keyAuth
 from server.getmedia import GetMedia
 
-most_popular_m = {}
+most_popular_m = []
 
 nowplaying_m = []
 
@@ -15,4 +15,6 @@ keyAuth(True, 'en')
 #Step 1; Check Cache Server for images
 GetMedia.checkCache(5);
 
-GetMedia.getAllMedia(GetMedia.air_today_tv, True)
+GetMedia.getAllMedia(GetMedia.mpopular_m, most_popular_m, True)
+
+

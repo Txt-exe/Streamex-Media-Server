@@ -9,42 +9,49 @@ class GetMedia:
     """
 Gets all media types that are within the imdb database
         """
-
-    data_response = ''
+    obj  = None    
     page_number = 1
     page_number_string = str(page_number)
-    nowplaying_m ='https://api.themoviedb.org/3/movie/now_playing?language=en'
-    mpopular_m = 'https://api.themoviedb.org/3/movie/popular?language=en'
-    toprated_m ='https://api.themoviedb.org/3/movie/top_rated?language=en'
-    upcoming_m = 'https://api.themoviedb.org/3/movie/upcoming?language=en'
+
+    nowplaying_m ='https://api.themoviedb.org/3/movie/now_playing?language=en'+ page_number_string
+    mpopular_m = 'https://api.themoviedb.org/3/movie/popular?language=en'+ page_number_string
+    toprated_m ='https://api.themoviedb.org/3/movie/top_rated?language=en'+ page_number_string
+    upcoming_m = 'https://api.themoviedb.org/3/movie/upcoming?language=en'+ page_number_string
 
  
 
     air_today_tv = 'https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=' + page_number_string
-    on_air_tv = 'https://api.themoviedb.org/3/tv/on_the_air?language=en'
-    popular_tv ='https://api.themoviedb.org/3/tv/popular?language=en'
-    top_rated_tv ='https://api.themoviedb.org/3/tv/top_rated?language=en'
+    on_air_tv = 'https://api.themoviedb.org/3/tv/on_the_air?language=en'+ page_number_string
+    popular_tv ='https://api.themoviedb.org/3/tv/popular?language=en'+ page_number_string
+    top_rated_tv ='https://api.themoviedb.org/3/tv/top_rated?language=en'+ page_number_string
 
 
     #data bool
     data_is_current = False
     @staticmethod
-    def getAllMedia(category, debug_log = False):
+    def getAllMedia(category, list_to_convert, debug_log = False):
         """
     Gets Media(Movies Or TV) from TMDB Server and saves them to CSV file
         """
+
         url = category
         headers = {
             "accept": "application/json",
             "Authorization": "Bearer" + " " + login.api_token
         }
         response = requests.get(url, headers=headers)
-        #Adding separate var for response Text for easy modifying
-        data_response = response.text
-        if debug_log == True:
-            obj = json.loads(data_response)
+        
+        #Get data and return a json text object
+        obj = json.loads(response.text)
+
+
+        list_to_convert = obj['results'][0]['backdrop_path']
+
+
+        #prints Data from request in orginzed JSON format
+        if debug_log == True:     
             json_formatted_str = json.dumps(obj, indent=4)
-            print(json_formatted_str)
+            print(obj)                                                                                         
         
 
     @staticmethod
