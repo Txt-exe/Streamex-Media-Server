@@ -2,14 +2,15 @@ import requests
 import json
 import csv
 import os
+import logging
 import server.auth as login
 
 
 class GetMedia:
     """
 Gets all media types that are within the imdb database
-        """
-    obj  = None    
+        """  
+
     page_number = 1
     page_number_string = str(page_number)
 
@@ -29,7 +30,7 @@ Gets all media types that are within the imdb database
     #data bool
     data_is_current = False
     @staticmethod
-    def getAllMedia(category, list_to_convert, debug_log = False):
+    def getAllMedia(category, debug_log = False):
         """
     Gets Media(Movies Or TV) from TMDB Server and saves them to CSV file
         """
@@ -42,17 +43,21 @@ Gets all media types that are within the imdb database
         response = requests.get(url, headers=headers)
         
         #Get data and return a json text object
-        obj = json.loads(response.text)
+        json_obj = json.loads(response.text)
 
-
-        list_to_convert = obj['results'][0]['backdrop_path']
+       #Leaving this here for refernce
+       #obj['results'][0]['backdrop_path']
 
 
         #prints Data from request in orginzed JSON format
         if debug_log == True:     
-            json_formatted_str = json.dumps(obj, indent=4)
-            print(obj)                                                                                         
-        
+            json_obj_org = json.dumps(json_obj, indent=4)
+            logging.debug('DEBUGGING IS ENABLED, Printing Response.text:\n\n')
+            for i in range(len(json_obj)):
+                pass
+                print(json_obj['results'])      
+        #Return Json Object for flutter code                                                                                          
+        return json_obj
 
     @staticmethod
     def checkCache(check_interval):

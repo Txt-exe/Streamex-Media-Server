@@ -1,6 +1,6 @@
 from server.auth import keyAuth
 from server.getmedia import GetMedia
-
+from flask import Flask
 most_popular_m = []
 
 nowplaying_m = []
@@ -8,13 +8,18 @@ nowplaying_m = []
 toprated_m = []
 
 upcoming_m = []
+json_response = {}
 
+app = Flask(__name__)
 
-keyAuth(True, 'en')
+@app.route("/")
+def getdata():
+
+    keyAuth(True, 'en')
+    GetMedia.getAllMedia(GetMedia.nowplaying_m)
 
 #Step 1; Check Cache Server for images
 GetMedia.checkCache(5);
 
-GetMedia.getAllMedia(GetMedia.mpopular_m, most_popular_m, True)
-
+#print(json_response['results'][0]['backdrop_path'])
 
