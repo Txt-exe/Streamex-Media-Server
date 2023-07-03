@@ -29,6 +29,7 @@ Gets all media types that are within the imdb database
 
     #data bool
     data_is_current = False
+    
     @staticmethod
     def getAllMedia(category, debug_log = False):
         """
