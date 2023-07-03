@@ -29,9 +29,9 @@ Gets all media types that are within the imdb database
 
     #data bool
     data_is_current = False
-    
+
     @staticmethod
-    def getAllMedia(category, debug_log = False):
+    def getAllMedia(category):
         """
     Gets Media(Movies Or TV) from TMDB Server and saves them to CSV file
         """
@@ -48,15 +48,7 @@ Gets all media types that are within the imdb database
 
        #Leaving this here for refernce
        #obj['results'][0]['backdrop_path']
-
-
-        #prints Data from request in orginzed JSON format
-        if debug_log == True:     
-            json_obj_org = json.dumps(json_obj, indent=4)
-            logging.debug('DEBUGGING IS ENABLED, Printing Response.text:\n\n')
-            for i in range(len(json_obj)):
-                pass
-                print(json_obj['results'])      
+                 
         #Return Json Object for flutter code                                                                                          
         return json_obj
 
